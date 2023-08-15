@@ -16,9 +16,9 @@ SELECT compilation_name -- Названия сборников, вышедших
 FROM compilation c 
 WHERE c.release_year  BETWEEN 2018 AND 2020
 
-SELECT track_name  -- Название треков, которые содержат слово «мой» или «my».
-FROM track
-WHERE (LOWER(track_name) LIKE '%my%' OR  LOWER(track_name)  LIKE'%мой%');
+-- Название треков, которые содержат слово «мой» или «my».
+SELECT  track_name 
+FROM (SELECT *, REGEXP_MATCHES(track_name,'((^my\W)|(\Wmy$)|(\Wmy\W))|((^мой\W)|(\Wмой$)|(\Wмой\W))','i')  from track  ) as t
 
 /* Задание 3*/
 
